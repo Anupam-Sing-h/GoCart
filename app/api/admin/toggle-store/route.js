@@ -28,10 +28,10 @@ export async function POST(request) {
             where: { id: storeId },
             data: { isActive: !store.isActive }
         });
-        return NextResponse.json({message: `Store is now ${updatedStore.isActive ? "inactive" : "active"}`}, {status: 200});
+        return NextResponse.json({message: `Store is now ${updatedStore.isActive ?  "active":"inactive"}`}, {status: 200});
     }
     catch (error) {
-        console.error("Error in approve-store GET route:", error);
+        console.error("Error in approve-store POST route:", error);
         return NextResponse.json({error: error.code || error.message || "Internal Server Error"}, {status: 500});
     }
 }
