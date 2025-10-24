@@ -13,10 +13,10 @@ export async function GET(request) {
             return NextResponse.json({error: "Unauthorized"}, {status: 401});
         }
 
-        const storInfo = await prisma.store.findUnique({
+        const storeInfo = await prisma.store.findUnique({
             where: {userId}
         });
-        return NextResponse.json({isSeller, storInfo})
+        return NextResponse.json({isSeller, storeInfo})
     } catch (error) {
         console.log(error);
         return NextResponse.json({error: error.code || error.message}, {status: 400});

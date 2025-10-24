@@ -1,12 +1,18 @@
 'use client'
 import { dummyStoreDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
+import { useAuth, useUser } from "@clerk/nextjs"
+import axios from "axios"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StarIcon, TagsIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 export default function Dashboard() {
+
+    const {user} = useUser()
+    const {getToken} = useAuth()
 
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
@@ -21,14 +27,21 @@ export default function Dashboard() {
     })
 
     const dashboardCardsData = [
-        { title: 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon },
-        { title: 'Total Earnings', value: currency + dashboardData.totalEarnings, icon: CircleDollarSignIcon },
-        { title: 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon },
-        { title: 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon },
+        { title: 'Total Products', value: dashboardData?.totalProducts ?? 0, icon: ShoppingBasketIcon },
+        { title: 'Total Earnings', value: currency + (dashboardData?.totalEarnings ?? 0), icon: CircleDollarSignIcon },
+        { title: 'Total Orders', value: dashboardData?.totalOrders ?? 0, icon: TagsIcon },
+        { title: 'Total Ratings', value: dashboardData?.ratings?.length?? 0, icon: StarIcon },
     ]
 
     const fetchDashboardData = async () => {
-        setDashboardData(dummyStoreDashboardData)
+        try {
+            const token = await getToken()
+            const {data} = await axios.get('/api/store/dashboard', 
+                {headers: {Authorization: `Bearer ${token}`}})
+            setDashboardData(data )
+        } catch (error) {
+            toast.error(error?.response?.data?.error || error.message)
+        }
         setLoading(false)
     }
 
@@ -58,9 +71,9 @@ export default function Dashboard() {
 
             <h2>Total Reviews</h2>
 
-            <div className="mt-5">
+            {/* <div className="mt-5">
                 {
-                    dashboardData.ratings.map((review, index) => (
+                    {Array.isArray(dashboardData?.ratings) && dashboardData.ratings.map((review, index) => (
                         <div key={index} className="flex max-sm:flex-col gap-5 sm:items-center justify-between py-6 border-b border-slate-200 text-sm text-slate-600 max-w-4xl">
                             <div>
                                 <div className="flex gap-3">
@@ -85,8 +98,57 @@ export default function Dashboard() {
                                 <button onClick={() => router.push(`/product/${review.product.id}`)} className="bg-slate-100 px-5 py-2 hover:bg-slate-200 rounded transition-all">View Product</button>
                             </div>
                         </div>
-                    ))
+                    ))}
                 }
+            </div> */}
+                <div className="mt-5">
+                    {Array.isArray(dashboardData?.ratings) &&
+                        dashboardData.ratings.map((review, index) => (
+                        <div key={index} className="flex max-sm:flex-col gap-5 sm:items-center justify-between py-6 border-b border-slate-200 text-sm text-slate-600 max-w-4xl">
+                            <div>
+                            <div className="flex gap-3">
+                                <Image
+                                src={review.user?.image || "/default-avatar.png"}
+                                alt=""
+                                className="w-10 aspect-square rounded-full"
+                                width={100}
+                                height={100}
+                                />
+                                <div>
+                                <p className="font-medium">{review.user?.name || "Anonymous"}</p>
+                                <p className="font-light text-slate-500">{new Date(review.createdAt).toDateString()}</p>
+                                </div>
+                            </div>
+                            <p className="mt-3 text-slate-500 max-w-xs leading-6">{review.review}</p>
+                            </div>
+                            <div className="flex flex-col justify-between gap-6 sm:items-end">
+                            <div className="flex flex-col sm:items-end">
+                                <p className="text-slate-400">{review.product?.category || "Unknown Category"}</p>
+                                <p className="font-medium">{review.product?.name || "Unnamed Product"}</p>
+                                <div className="flex items-center">
+                                {Array(5).fill('').map((_, starIndex) => (
+                                    <StarIcon
+                                    key={starIndex}
+                                    size={17}
+                                    className="text-transparent mt-0.5"
+                                    fill={review.rating >= starIndex + 1 ? "#00C950" : "#D1D5DB"}
+                                    />
+                                ))}
+                                </div>
+                            </div>
+                            {review.product?.id ? (
+                                <button
+                                onClick={() => router.push(`/product/${review.product.id}`)}
+                                className="bg-slate-100 px-5 py-2 hover:bg-slate-200 rounded transition-all"
+                                >
+                                View Product
+                                </button>
+                            ) : (
+                                <p className="text-red-400">Product not found</p>
+                            )}
+                            </div>
+                        </div>
+                    ))}
             </div>
         </div>
     )

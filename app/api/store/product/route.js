@@ -2,7 +2,7 @@ import authSeller from "@/middlewares/authSeller";
 import { getAuth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-
+import imagekit from "@/configs/imageKit"
 
 //Adding a new product in the store
 export async function POST(request) {
@@ -34,14 +34,16 @@ export async function POST(request) {
 
         //converting the image into binary formate for uploading 
         const imagesUrl = await Promise.all(images.map(async (image) => {
-            const buffer = Buffer.form(await images.arrayBuffer());
+            // const buffer = Buffer.form(await images.arrayBuffer());
+            const buffer = Buffer.from(await image.arrayBuffer());
             //uploading the image to imageKit
             const response = await imagekit.upload({
                     file : buffer,
-                    fileName : images.name,
+                    // fileName : images.name,
+                    fileName: image.name,
                     folder : "products"
                 });
-            //optaining the uploaded image url
+            //Optimizing the uploaded image url
             const Url = imagekit.url({
                 path: response.filePath,
                 transformation: [
@@ -61,7 +63,7 @@ export async function POST(request) {
                 mrp,
                 price,
                 category,
-                images: optimizeImageUrl,
+                images: imagesUrl,
                 storeId
             }
         });
@@ -78,6 +80,8 @@ export async function POST(request) {
 
 //Get all the products of the store
 export async function GET(request) {
+        const {userId} = getAuth(request);
+
     try {
         if(!userId){
             return NextResponse.json({message: "Unauthorized"}, {status: 401});
