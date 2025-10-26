@@ -15,8 +15,8 @@ export async function POST(request){
             const session = await stripe.checkout.sessions.list({
                 payment_intent: paymentIntentId
             })
-
-            const {orderIds, userId, appId} = session.data[0].metadata
+            //const session = await stripe.checkout.sessions.retrieve({payment_intent: paymentIntentId});
+            const {orderIds, userId, appId} = session.data[0].metadata;
 
             if (appId !== 'gocart') {
                 return NextResponse.json({received: true, message: 'Invalid app id'})
@@ -26,9 +26,9 @@ export async function POST(request){
 
             if (isPaid) {
                 //mark order as paid
-                await Promise.all(orderIdsArray.map(async(orderIds) => {
+                await Promise.all(orderIdsArray.map(async(orderId) => {
                     await prisma.order.update({
-                        where: {id: orderIds},
+                        where: {id: orderId},
                         data: {isPaid: true}
                     })
                 }))
@@ -48,12 +48,12 @@ export async function POST(request){
         }
 
         switch (event.type){
-            case 'payment_intent_succeeded': {
+            case 'payment_intent.succeeded': {
                 await handlePaymentIntent(event.data.object.id, true)
                 break;
             }
                 
-            case 'payment_intent_canceled': {
+            case 'payment_intent.canceled': {
                 await handlePaymentIntent(event.data.object.id, false)
                 break;
             }
