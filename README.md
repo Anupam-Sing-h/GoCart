@@ -82,6 +82,7 @@ npm run dev
 <img width="500" height="300" alt="Screenshot 2025-10-26 165651" src="https://github.com/user-attachments/assets/40240e40-ad52-4d1c-b6d3-c9047f5c558c" />
 
 ### Admin Page
+To explore/preview the Admit section contact me through : anupamsingh584210@gmail.com
 <img width="500" height="300" alt="Screenshot 2025-10-26 165721" src="https://github.com/user-attachments/assets/fc290aa6-186f-456d-9b8b-2cfeeb8a5b85" />
 
 ### Neon Db
