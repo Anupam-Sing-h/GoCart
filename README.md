@@ -1,85 +1,92 @@
-<div align="center">
-  <h1><img src="https://gocartshop.in/favicon.ico" width="20" height="20" alt="GoCart Favicon">
-   GoCart</h1>
-  <p>
-    An open-source multi-vendor e-commerce platform built with Next.js and Tailwind CSS.
-  </p>
-  <p>
-    <a href="https://github.com/GreatStackDev/goCart/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/GreatStackDev/goCart?style=for-the-badge" alt="License"></a>
-    <a href="https://github.com/GreatStackDev/goCart/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome"></a>
-    <a href="https://github.com/GreatStackDev/goCart/issues"><img src="https://img.shields.io/github/issues/GreatStackDev/goCart?style=for-the-badge" alt="GitHub issues"></a>
-  </p>
-</div>
+# 🛒 GoCart – Multi‑Vendor E‑Commerce Platform
+
+GoCart is a full‑stack **PERN** (Postgres, Express, React, Node) marketplace platform with **Next.js** on the frontend.  
+It supports **multi‑vendor stores**, **secure authentication**, **Stripe payments**, and even **AI‑powered product descriptions**.
 
 ---
 
-## 📖 Table of Contents
-
-- [✨ Features](#-features)
-- [🛠️ Tech Stack](#-tech-stack)
-- [🚀 Getting Started](#-getting-started)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
+[![Clerk](https://img.shields.io/badge/Clerk-3B82F6?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
+[![Inngest](https://img.shields.io/badge/Inngest-000000?style=for-the-badge&logo=inngest&logoColor=white)](https://www.inngest.com/)
+[![NeonDB](https://img.shields.io/badge/NeonDB-00E599?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.tech/)
+[![Geminai AI](https://img.shields.io/badge/Geminai_AI-8A2BE2?style=for-the-badge&logo=openai&logoColor=white)](#)
 
 ---
 
-## Features
+## ✨ Features
 
-- **Multi-Vendor Architecture:** Allows multiple vendors to register, manage their own products, and sell on a single platform.
-- **Customer-Facing Storefront:** A beautiful and responsive user interface for customers to browse and purchase products.
-- **Vendor Dashboards:** Dedicated dashboards for vendors to manage products, view sales analytics, and track orders.
-- **Admin Panel:** A comprehensive dashboard for platform administrators to oversee vendors, products, and commissions.
+- 👤 **Authentication & Authorization** – Clerk integration for secure login and role‑based access
+- 🛍️ **Multi‑Vendor Support** – Sellers can manage products, orders, and dashboards
+- 💳 **Stripe Payments** – Checkout with webhook‑driven order updates and cart clearing
+- 🎟️ **Coupons & Discounts** – New user and membership‑based coupon validation
+- 📦 **Order Management** – Track order status (placed, processing, delivered)
+- 🤖 **AI Integration** – Product descriptions generated with Geminai AI
+- 🗄️ **Database** – Prisma ORM with NeonDB (Postgres) for scalable persistence
+- ⚡ **Background Jobs** – Inngest for event‑driven flows like coupon expiry
+- 🎨 **Modern UI** – Next.js + Tailwind CSS for responsive design
 
-## 🛠️ Tech Stack <a name="-tech-stack"></a>
+---
 
-- **Framework:** Next.js
-- **Styling:** Tailwind CSS
-- **UI Components:** Lucide React for icons
-- **State Management:** Redux Toolkit
+## 🏗️ Tech Stack
 
-## 🚀 Getting Started <a name="-getting-started"></a>
+- **Frontend**: React, Next.js, Tailwind CSS, Redux Toolkit
+- **Backend**: Node.js, Express, Prisma
+- **Database**: PostgreSQL (NeonDB)
+- **Auth**: Clerk
+- **Payments**: Stripe
+- **AI**: Geminai
+- **Infra**: Vercel (deployment), Inngest (background jobs)
 
-First, install the dependencies. We recommend using `npm` for this project.
+---
+###
 
-```bash
+## 🚀 Getting Started
+
+### 1. Clone the repo
+```base
+git clone https://github.com/Anupam-Sing-h/GoCart.git
+cd GoCart
+ ```
+### 2. Install dependencies
+```base
 npm install
-```
-
-Then, run the development server:
-
-```bash
+ ```
+### 3. Environment variables
+```base
+Create a .env.local file with
+ ```
+### 4. Run database migrations
+```base
+npx prisma migrate dev
+ ```
+### 5. Start the dev server
+```base
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ ```
+# 📸 Screenshots
+### Home Page
+<img width="500" height="300" alt="Screenshot 2025-10-26 165510" src="https://github.com/user-attachments/assets/9588ee88-0077-408f-b3a2-43da9fd11f60" />
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Shop Page
+<img width="500" height="300" alt="Screenshot 2025-10-26 165613" src="https://github.com/user-attachments/assets/f55a1110-77be-4ac3-b48a-64b05affa380" />
 
-You can start editing the page by modifying `app/(public)/page.js`. The page auto-updates as you edit the file.
+### Store Page
+<img width="500" height="300" alt="Screenshot 2025-10-26 165651" src="https://github.com/user-attachments/assets/40240e40-ad52-4d1c-b6d3-c9047f5c558c" />
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Outfit](https://vercel.com/font), a new font family for Vercel.
+### Admin Page
+To explore/preview the Admit section contact me through : anupamsingh584210@gmail.com
+<img width="500" height="300" alt="Screenshot 2025-10-26 165721" src="https://github.com/user-attachments/assets/fc290aa6-186f-456d-9b8b-2cfeeb8a5b85" />
 
----
+### Neon Db
+<img width="500" height="300" alt="Screenshot 2025-10-26 165812" src="https://github.com/user-attachments/assets/fc424ed4-b158-4a74-9a2b-aea8641c607a" />
 
-## 🤝 Contributing <a name="-contributing"></a>
-
-We welcome contributions! Please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for more details on how to get started.
-
----
-
-## 📜 License <a name="-license"></a>
-
-This project is licensed under the MIT License. See the [LICENSE.md](./LICENSE.md) file for details.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
