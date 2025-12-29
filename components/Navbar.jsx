@@ -35,6 +35,29 @@ const Navbar = () => {
                         
                     </Link>
 
+                    <h6>
+                        To Access the Admin Panel
+                        <a
+                            className="underline hover:shadow-lg hover:shadow-blue-500 ml-2"
+                            href={`mailto:anupamsingh584210@gmail.com?subject=${encodeURIComponent(
+                            "Request to Access GoCart Admin Panel"
+                            )}&body=${encodeURIComponent(
+                            `Hi Anupam,
+
+                        I would like to request access to the GoCart admin panel.
+                        Please whitelist the following email address for admin access:
+
+                        [Insert your email address here]
+
+                        Thank you for enabling access.
+
+                        Best regards,
+                        [Your Name]`
+                            )}`}
+                        >
+                            Email Me
+                        </a>
+                        </h6>
 
                     {/* Desktop Menu */}
                     <div className="hidden sm:flex items-center gap-4 lg:gap-8 text-slate-600">
@@ -71,10 +94,10 @@ const Navbar = () => {
                             )
                         }
 
-                        <h10>To Access the Admin Pannel 
+                        {/* <h10>To Access the Admin Pannel 
                         <a className="underline hover:bg-blue-400" 
                         href="mailto:anupamsingh584210@gmail.com?subject=Request%20for%20Admin%20Panel%20Access%20-%20GoCart%20Project&body=Hi%20Anupam,%0D%0A%0D%0AI%20am%20[Your%20Name].%20I%20would%20like%20to%20request%20access%20to%20the%20admin%20panel%20of%20your%20project%20'GoCart'%20to%20preview%20its%20features%20and%20understand%20how%20the%20admin%20section%20works.%0D%0A%0D%0AThank%20you%20in%20advance%20for%20granting%20access.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]">
-                            Email Me </a> </h10>
+                            Email Me </a> </h10> */}
 
                     </div>
 
